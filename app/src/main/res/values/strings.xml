@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Head Torso Legs</string>
+    <string name="join">Join Game</string>
+    <string name="new_game">New Game</string>
+    <string name="create_game">Create</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="enter_code">Enter game code</string>
+    <string name="game">Game</string>
+    <string name="players">Players:</string>
+    <string name="heads">Heads:</string>
+    <string name="torso">Torso:</string>
+    <string name="legs">Legs:</string>
+    <string name="start_game">Start Game:</string>
+</resources>
