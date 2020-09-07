@@ -1,2 +1,2 @@
-rootProject.name='connectit'
+rootProject.name='HeadTorsoLegs'
 include ':app'

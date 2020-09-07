@@ -1,10 +1,12 @@
-package com.example.connectit;
+package com.example.HeadTorsoLegs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.connectit.R;
 
 public class MainActivity extends AppCompatActivity {
 
