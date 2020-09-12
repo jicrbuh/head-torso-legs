@@ -1,57 +1,72 @@
 package com.example.HeadTorsoLegs;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class UserData implements Parcelable {
+public class UserData {
 
     private String PlayerName;
-    private int Player;
+    private int PlayerNum;
     private String DrawingPosition;
     private String GameCode;
     private String GameProgression;
     private String PushToken;
 
-    public UserData(String name){
+    public void setPlayerName(String playerName) {
+        PlayerName = playerName;
+    }
+
+    public void setPlayerNum(int playerNum) {
+        PlayerNum = playerNum;
+    }
+
+    public void setDrawingPosition(String drawingPosition) {
+        DrawingPosition = drawingPosition;
+    }
+
+    public void setGameCode(String gameCode) {
+        GameCode = gameCode;
+    }
+
+    public void setGameProgression(String gameProgression) {
+        GameProgression = gameProgression;
+    }
+
+    public void setPushToken(String pushToken) {
+        PushToken = pushToken;
+    }
+
+    public String getPlayerName() {
+        return PlayerName;
+    }
+
+    public int getPlayerNum() {
+        return PlayerNum;
+    }
+
+    public String getDrawingPosition() {
+        return DrawingPosition;
+    }
+
+    public String getGameCode() {
+        return GameCode;
+    }
+
+    public String getGameProgression() {
+        return GameProgression;
+    }
+
+    public String getPushToken() {
+        return PushToken;
+    }
+
+
+
+    public UserData(String name) {
         this.PlayerName = name;
-        this.Player = -1;
+        this.PlayerNum = -1;
         this.DrawingPosition = null;
         this.GameCode = null;
         this.PushToken = null;
         this.GameProgression = null;
     }
 
-
-    //parcel part
-    public UserData(Parcel in){
-        String[] data= new String[6];
-
-    }
-    @Override
-    public int describeContents() {
-// TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-// TODO Auto-generated method stub
-
-    }
-
-    public static final Parcelable.Creator<UserData> CREATOR= new Parcelable.Creator<UserData>() {
-
-        @Override
-        public UserData createFromParcel(Parcel source) {
-// TODO Auto-generated method stub
-            return new UserData(source);  //using parcelable constructor
-        }
-
-        @Override
-        public UserData[] newArray(int size) {
-// TODO Auto-generated method stub
-            return new UserData[size];
-        }
-    };
 
 }
