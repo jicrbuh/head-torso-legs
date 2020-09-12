@@ -10,8 +10,6 @@ import com.google.gson.Gson;
 
 import com.example.connectit.R;
 
-import java.util.List;
-
 public class NewGameActivity extends Activity {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String UserDataKEY = "userDataKey";
@@ -36,6 +34,8 @@ public class NewGameActivity extends Activity {
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 // save userData to shared preference -
                 // https://stackoverflow.com/questions/7145606/how-do-you-save-store-objects-in-sharedpreferences-on-android
+                //how to share it between activities:
+                //https://stackoverflow.com/questions/11747687/sharedpreferences-wont-share-between-activities
                 String userDataJson = new Gson().toJson(userData);
                 editor.putString(UserDataKEY, userDataJson);
                 editor.commit();
