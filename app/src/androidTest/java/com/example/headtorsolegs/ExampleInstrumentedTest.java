@@ -1,4 +1,4 @@
-package com.example.connectit;
+package com.example.headtorsolegs;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.connectit", appContext.getPackageName());
+        assertEquals("com.example.headtorsolegs", appContext.getPackageName());
     }
 }

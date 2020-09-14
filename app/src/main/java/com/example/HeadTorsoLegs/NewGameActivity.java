@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import com.google.gson.Gson;
 
-import com.example.connectit.R;
+import com.example.headtorsolegs.R;
 
 public class NewGameActivity extends Activity {
     public static final String MyPREFERENCES = "MyPrefs" ;
@@ -39,6 +39,9 @@ public class NewGameActivity extends Activity {
                 String userDataJson = new Gson().toJson(userData);
                 editor.putString(UserDataKEY, userDataJson);
                 editor.commit();
+
+                // go to waiting room
+
             }
         });
 

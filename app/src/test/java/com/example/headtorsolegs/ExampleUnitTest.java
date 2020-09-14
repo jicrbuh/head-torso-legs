@@ -1,4 +1,4 @@
-package com.example.connectit;
+package com.example.headtorsolegs;
 
 import org.junit.Test;
 
