@@ -2,6 +2,7 @@ package com.example.HeadTorsoLegs;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.content.SharedPreferences;
 import android.view.View;
@@ -29,7 +30,7 @@ public class NewGameActivity extends Activity {
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                userData = new UserData("test");
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 // save userData to shared preference -
@@ -41,7 +42,8 @@ public class NewGameActivity extends Activity {
                 editor.commit();
 
                 // go to waiting room
-
+                Intent intent = new Intent(view.getContext(), WaitingRoomActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
 

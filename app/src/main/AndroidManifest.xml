@@ -22,6 +22,9 @@
         <activity android:name="com.example.HeadTorsoLegs.JoinGameActivity">
 
         </activity>
+        <activity android:name="com.example.HeadTorsoLegs.WaitingRoomActivity">
+
+        </activity>
     </application>
 
 </manifest>
