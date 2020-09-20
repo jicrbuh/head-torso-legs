@@ -41,9 +41,10 @@
 
         <Button
             android:layout_marginTop="50dp"
-            android:id="@+id/button2"
+            android:id="@+id/buttonJoin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:background="@drawable/rounded_corners"
             android:text="@string/join" />
     </LinearLayout>

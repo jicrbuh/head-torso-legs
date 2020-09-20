@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="40dp"
+            android:id="@+id/textViewGame"
             android:text="@string/game" />
 
         <TextView
@@ -24,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
+            android:id="@+id/textViewPlayers"
             android:text="@string/players" />
 
         <LinearLayout
@@ -38,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="25dp"
-                android:id="@+id/TextViewHeads"
+                android:id="@+id/textViewHeads"
                 android:text="@string/heads"/>
 
             <TextView
@@ -46,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="25dp"
+                android:id="@+id/textViewTorso"
                 android:text="@string/torso"/>
 
             <TextView
@@ -53,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="25dp"
+                android:id="@+id/textViewLegs"
                 android:text="@string/legs"/>
 
         </LinearLayout>

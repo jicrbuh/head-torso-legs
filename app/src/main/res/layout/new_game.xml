@@ -37,6 +37,7 @@
             android:id="@+id/buttonCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:background="@drawable/rounded_corners"
             android:text="@string/create_game" />
     </LinearLayout>
