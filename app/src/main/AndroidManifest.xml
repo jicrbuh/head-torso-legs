@@ -25,6 +25,9 @@
         <activity android:name="com.example.HeadTorsoLegs.WaitingRoomActivity">
 
         </activity>
+        <activity android:name="com.example.HeadTorsoLegs.DrawActivity">
+
+        </activity>
     </application>
 
 </manifest>
