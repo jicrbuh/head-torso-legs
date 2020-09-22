@@ -22,6 +22,7 @@ public class WaitingRoomActivity extends Activity {
         String userDataJson = sharedpreferences.getString(MyConstants.UserDataKEY, "");
         UserData userData = gson.fromJson(userDataJson, UserData.class);
         displayMessage(userData.getPlayerName());
+
     }
 
     public void displayMessage(String message) {

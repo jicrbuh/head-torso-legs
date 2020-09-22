@@ -11,4 +11,6 @@
     <string name="torso">Torso:</string>
     <string name="legs">Legs:</string>
     <string name="start_game">Start Game:</string>
+    <string name="draw">Draw:</string>
+    <string name="finished">Finished!</string>
 </resources>

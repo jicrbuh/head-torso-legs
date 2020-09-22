@@ -10,7 +10,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import com.google.firebase.database.*;
 import com.google.gson.Gson;
 import com.example.headtorsolegs.R;
 import com.example.HeadTorsoLegs.MyConstants;
@@ -63,13 +63,14 @@ public class NewGameActivity extends Activity {
                 String userName = editTextName.getText().toString();
                 userData = new UserData(userName);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                // save userData to shared preference -
-                // https://stackoverflow.com/questions/7145606/how-do-you-save-store-objects-in-sharedpreferences-on-android
-                //how to share it between activities:
-                //https://stackoverflow.com/questions/11747687/sharedpreferences-wont-share-between-activities
                 String userDataJson = new Gson().toJson(userData);
                 editor.putString(MyConstants.UserDataKEY, userDataJson);
                 editor.commit();
+
+                // push to FB
+                FirebaseDatabase dataBase = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = dataBase.getReference("GAME1");
+                myRef.setValue(userDataJson);
 
                 // go to waiting room
                 Intent intent = new Intent(view.getContext(), WaitingRoomActivity.class);
