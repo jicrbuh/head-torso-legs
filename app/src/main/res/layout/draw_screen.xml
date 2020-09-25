@@ -19,7 +19,7 @@
             android:textSize="40dp"
             android:text="@string/draw" />
 
-        <ImageView
+        <com.example.HeadTorsoLegs.DrawView
             android:id="@+id/myimageview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
