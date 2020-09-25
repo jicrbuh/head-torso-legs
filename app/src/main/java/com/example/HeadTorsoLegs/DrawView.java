@@ -39,7 +39,7 @@ public class DrawView extends View {
         //get drawing area setup for interaction
         drawPath = new Path();
         drawPaint = new Paint();
-        drawPaint.setColor(3123);
+        drawPaint.setColor(0xFF1FFFFF);
         drawPaint.setAntiAlias(true);
         drawPaint.setStrokeWidth(20);
         drawPaint.setStyle(Paint.Style.STROKE);
