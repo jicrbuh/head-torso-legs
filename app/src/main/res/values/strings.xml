@@ -13,4 +13,7 @@
     <string name="start_game">Start Game:</string>
     <string name="draw">Draw:</string>
     <string name="finished">Finished!</string>
+    <string name="wait_other">Waiting for the other players</string>
+    <string name="creation">Your Creation:</string>
+    <string name="share">share</string>
 </resources>
