@@ -28,6 +28,14 @@
         <activity android:name="com.example.HeadTorsoLegs.DrawActivity">
 
         </activity>
+
+        <activity android:name="com.example.HeadTorsoLegs.ShowCreationActivity">
+
+        </activity>
+
+        <activity android:name="com.example.HeadTorsoLegs.AfterDrawingActivity">
+
+        </activity>
     </application>
 
 </manifest>

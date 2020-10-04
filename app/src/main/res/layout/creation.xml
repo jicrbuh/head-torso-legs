@@ -20,19 +20,20 @@
             android:text="@string/creation" />
 
         <ImageView
+            android:id="@+id/creation"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="0px"
+            android:layout_weight="3"
             tools:src="@sample/test.bmp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center|bottom"
         android:orientation="vertical" >
 
         <Button
-            android:layout_marginTop="50dp"
             android:id="@+id/buttonJoin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

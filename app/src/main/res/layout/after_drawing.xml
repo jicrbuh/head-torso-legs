@@ -16,7 +16,7 @@
 
         <Button
             android:layout_marginTop="50dp"
-            android:id="@+id/buttonJoin"
+            android:id="@+id/buttonReady"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
