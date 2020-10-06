@@ -34,7 +34,9 @@ public class DrawView extends View {
         super(context, attrs);
         setupDrawing();
     }
-
+    public Bitmap getCanvasBitmap() {
+        return canvasBitmap;
+    }
     private void setupDrawing(){
         //get drawing area setup for interaction
         drawPath = new Path();
