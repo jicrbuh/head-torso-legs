@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import com.google.firebase.database.*;
 import com.google.gson.Gson;
 import com.example.headtorsolegs.R;
-import com.example.HeadTorsoLegs.MyConstants;
 
 public class NewGameActivity extends Activity {
     SharedPreferences sharedpreferences;
@@ -22,7 +22,7 @@ public class NewGameActivity extends Activity {
     EditText editTextName;
     GameData gameData;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("game-data");
+    DatabaseReference DBRef = database.getReference("game-data");
 
 
 
@@ -38,7 +38,9 @@ public class NewGameActivity extends Activity {
         buttonCreate =(Button)findViewById(R.id.buttonCreate);
 
         gameData = new GameData();
-        DatabaseReference gameRef = ref.child("game");
+
+        DatabaseReference gameRef = DBRef.child("game2");
+        Log.i("gameData", "onCreate: headdrawing - " + gameData.getHeadDrawing());
         gameRef.setValue(gameData);
 
 
@@ -80,7 +82,7 @@ public class NewGameActivity extends Activity {
 
                 // push to FB
                 FirebaseDatabase dataBase = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = dataBase.getReference("GAME1");
+                DatabaseReference myRef = dataBase.getReference("GAME");
                 myRef.setValue(userData);
 
                 // go to waiting room

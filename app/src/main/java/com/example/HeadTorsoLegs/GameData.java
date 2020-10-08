@@ -2,6 +2,8 @@ package com.example.HeadTorsoLegs;
 
 import android.util.Log;
 
+import java.util.List;
+
 public class GameData {
 
     //private String PlayerName;
@@ -10,6 +12,13 @@ public class GameData {
     //private String GameProgression;
     //private String PushToken;
     private String GameCode;
+    private String HeadDrawing;
+    private String TorsoDrawing;
+    private String LegsDrawing;
+    private String GameProgression;
+    private String FinalDrawing;
+    private List<UserData> Users;
+
     final private static int CODE_LEN = 4;
 /*
     public void setPlayerName(String playerName) {
@@ -59,11 +68,18 @@ public class GameData {
         GameCode = gameCode;
     }
 
+    public void setHeadDrawing(String headDrawing) {
+        HeadDrawing = headDrawing;
+    }
+
+    public String getHeadDrawing() {
+        return this.HeadDrawing;
+    }
 
     public GameData() {
         //this.PlayerName = name;
         //this.PlayerNum = -1;
-        //this.DrawingPosition = null;
+        this.HeadDrawing = "df";
         this.GameCode = createRandCode();
         //this.PushToken = null;
         //this.GameProgression = null;
