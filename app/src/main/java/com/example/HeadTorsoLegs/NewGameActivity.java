@@ -20,6 +20,11 @@ public class NewGameActivity extends Activity {
     UserData userData;
     Button buttonCreate;
     EditText editTextName;
+    GameData gameData;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference("game-data");
+
+
 
 
     @Override
@@ -31,6 +36,12 @@ public class NewGameActivity extends Activity {
 
         editTextName = findViewById(R.id.editTextName);
         buttonCreate =(Button)findViewById(R.id.buttonCreate);
+
+        gameData = new GameData();
+        DatabaseReference gameRef = ref.child("game");
+        gameRef.setValue(gameData);
+
+
 
         editTextName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -70,7 +81,7 @@ public class NewGameActivity extends Activity {
                 // push to FB
                 FirebaseDatabase dataBase = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = dataBase.getReference("GAME1");
-                myRef.setValue(userDataJson);
+                myRef.setValue(userData);
 
                 // go to waiting room
                 Intent intent = new Intent(view.getContext(), WaitingRoomActivity.class);
