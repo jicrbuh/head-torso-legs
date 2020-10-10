@@ -1,4 +1,4 @@
-package com.example.HeadTorsoLegs.Types;
+package com.example.HeadTorsoLegs.types;
 
 public class UserData {
 

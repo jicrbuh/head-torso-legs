@@ -6,13 +6,13 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.headtorsolegs.R;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class ShowCreationActivity extends Activity {
     //https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-11-canvas/11-1a-p-create-a-simple-canvas/11-1a-p-create-a-simple-canvas.html
-
+    private FBConnect fbConnect = FBConnect.FBConnect();
 
     private void changePic() {
         ImageView img= (ImageView) findViewById(R.id.image);
@@ -21,7 +21,7 @@ public class ShowCreationActivity extends Activity {
 
     private void loadImageFB() {
         // Reference to an image file in Cloud Storage
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference storageReference = fbConnect.getStorageReference();
 
         // ImageView in your Activity
         ImageView imageView = findViewById(R.id.image);

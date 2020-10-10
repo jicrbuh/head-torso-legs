@@ -12,8 +12,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.HeadTorsoLegs.Types.MyConstants;
-import com.example.HeadTorsoLegs.Types.UserData;
+import com.example.HeadTorsoLegs.types.MyConstants;
+import com.example.HeadTorsoLegs.types.UserData;
+import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.HeadTorsoLegs.views.DrawView;
 import com.example.headtorsolegs.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,8 +32,8 @@ public class DrawActivity extends Activity {
     Button buttonFinished;
     //todo move to singleton
     //todo in DB singleton - two methods - two static one for storage and one for DB
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference("test/");
+    private FBConnect fbConnect = FBConnect.FBConnect();
+    StorageReference storageRef = fbConnect.getStorageReference();
     StorageReference drawingRef;
 
 

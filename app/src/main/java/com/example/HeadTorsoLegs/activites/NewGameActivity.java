@@ -12,12 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.HeadTorsoLegs.Types.GameData;
-import com.example.HeadTorsoLegs.Types.MyConstants;
-import com.example.HeadTorsoLegs.Types.UserData;
+import com.example.HeadTorsoLegs.types.GameData;
+import com.example.HeadTorsoLegs.types.MyConstants;
+import com.example.HeadTorsoLegs.types.UserData;
+import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.headtorsolegs.R;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 public class NewGameActivity extends Activity {
@@ -26,8 +26,7 @@ public class NewGameActivity extends Activity {
     Button buttonCreate;
     EditText editTextName;
     GameData gameData;
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference DBRef = database.getReference("game-data");
+    private FBConnect fbConnect = FBConnect.FBConnect();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class NewGameActivity extends Activity {
 
         gameData = new GameData();
 
-        DatabaseReference gameRef = DBRef.child("game2");
+        DatabaseReference gameRef = fbConnect.getDBRef().child("game2");
         Log.i("gameData", "onCreate: headdrawing - " + gameData.getHeadDrawing());
         gameRef.setValue(gameData);
 
@@ -84,9 +83,7 @@ public class NewGameActivity extends Activity {
 
                 // push to FB - fix all to the singleton
                 //todo maybe can get rid of sharedprefrence
-                FirebaseDatabase dataBase = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = dataBase.getReference("GAME");
-                myRef.setValue(userData);
+                fbConnect.getDBRef().setValue(userData);
 
                 // go to waiting room
                 Intent intent = new Intent(view.getContext(), WaitingRoomActivity.class);

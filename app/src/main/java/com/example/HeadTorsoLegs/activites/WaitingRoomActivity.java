@@ -8,21 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.headtorsolegs.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static com.example.HeadTorsoLegs.Types.MyConstants.MAX_NUM_PLAYERS;
+import static com.example.HeadTorsoLegs.types.MyConstants.MAX_NUM_PLAYERS;
 
 public class WaitingRoomActivity extends Activity {
 
     Button buttonStartGame;
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference DBRef = database.getReference("GAME");
-    private DatabaseReference mPostReference;
+    private FBConnect fbConnect = FBConnect.FBConnect();
 
     private void updatePlayers(String playerName, int playerNum) {
         if (!playerName.equals(null) && (playerNum < MAX_NUM_PLAYERS && playerNum > 0)) {
@@ -57,7 +54,7 @@ public class WaitingRoomActivity extends Activity {
         buttonStartGame =(Button)findViewById(R.id.buttonStartGame);
 
         // Add listener to the DB
-        DBRef.addValueEventListener(new ValueEventListener() {
+        fbConnect.getDBRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 updatePlayers(snapshot.child("playerName").getValue().toString(), 1);

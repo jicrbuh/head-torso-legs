@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 //todo make a singleton, return a reference
@@ -11,14 +13,22 @@ public class FBConnect {
 
     private static FBConnect singleInstance = null;
     final private String basePath = "game-data";
+
+    // FB database
     private FirebaseDatabase database;
     private DatabaseReference DBRef;
-    private DatabaseReference mPostReference;
+
+    //FB storage
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
 
 
     private FBConnect() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference DBRef = database.getReference(basePath);
+        database = FirebaseDatabase.getInstance();
+        DBRef = database.getReference(basePath);
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
     }
 
     public DatabaseReference getDBRef() {
@@ -29,6 +39,10 @@ public class FBConnect {
         return database;
     }
 
+    public StorageReference getStorageReference() {
+        return storageReference;
+    }
+
     public static FBConnect FBConnect() {
         if (singleInstance == null)
             singleInstance = new FBConnect();
@@ -36,6 +50,6 @@ public class FBConnect {
         return singleInstance;
     }
 
-    
+
 }
 
