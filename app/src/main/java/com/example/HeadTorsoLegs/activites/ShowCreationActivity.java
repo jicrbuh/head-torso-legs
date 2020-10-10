@@ -19,16 +19,18 @@ public class ShowCreationActivity extends Activity {
         img.setImageResource(R.drawable.flower);
     }
 
+
     private void loadImageFB() {
+
         // Reference to an image file in Cloud Storage
         StorageReference storageReference = fbConnect.getStorageReference();
-
+        StorageReference imgReference = storageReference.child("test/mountains.jpg");
         // ImageView in your Activity
-        ImageView imageView = findViewById(R.id.image);
+        ImageView imageView = (ImageView) findViewById(R.id.creation);
 
         // Download directly from StorageReference using Glide
         // (See MyAppGlideModule for Loader registration)
-        Glide.with(this /* context */).load(storageReference).into(imageView);
+        Glide.with(this).load(imgReference).into(imageView);
 
     }
 
@@ -38,13 +40,16 @@ public class ShowCreationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.creation);
 
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 ImageView img= (ImageView) findViewById(R.id.creation);
-                img.setImageResource(R.drawable.flower);
+                loadImageFB();
+                //img.setImageResource(R.drawable.flower);
             }
-        }, 5000);
+        }, 1000);
+
     }
 
 

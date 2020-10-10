@@ -1,18 +1,14 @@
 package com.example.HeadTorsoLegs.utilities;
 
-import android.util.Log;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.List;
-//todo make a singleton, return a reference
 public class FBConnect {
 
     private static FBConnect singleInstance = null;
-    final private String basePath = "game-data";
+    final private String baseDBPath = "game-data";
+    final private String baseStoragePath = "test";
 
     // FB database
     private FirebaseDatabase database;
@@ -26,7 +22,7 @@ public class FBConnect {
 
     private FBConnect() {
         database = FirebaseDatabase.getInstance();
-        DBRef = database.getReference(basePath);
+        DBRef = database.getReference(baseDBPath);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
     }

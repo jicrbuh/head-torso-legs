@@ -19,7 +19,6 @@ import com.example.HeadTorsoLegs.views.DrawView;
 import com.example.headtorsolegs.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
@@ -30,8 +29,6 @@ import java.io.ByteArrayOutputStream;
 public class DrawActivity extends Activity {
     //https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-11-canvas/11-1a-p-create-a-simple-canvas/11-1a-p-create-a-simple-canvas.html
     Button buttonFinished;
-    //todo move to singleton
-    //todo in DB singleton - two methods - two static one for storage and one for DB
     private FBConnect fbConnect = FBConnect.FBConnect();
     StorageReference storageRef = fbConnect.getStorageReference();
     StorageReference drawingRef;
