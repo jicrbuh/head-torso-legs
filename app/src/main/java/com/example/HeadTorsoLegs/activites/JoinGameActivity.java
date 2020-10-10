@@ -1,4 +1,4 @@
-package com.example.HeadTorsoLegs;
+package com.example.HeadTorsoLegs.activites;
 
 import android.app.Activity;
 import android.os.Bundle;

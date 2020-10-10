@@ -1,12 +1,14 @@
-package com.example.HeadTorsoLegs;
+package com.example.HeadTorsoLegs.activites;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
-import com.google.firebase.storage.*;
 import com.example.headtorsolegs.R;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ShowCreationActivity extends Activity {
     //https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-11-canvas/11-1a-p-create-a-simple-canvas/11-1a-p-create-a-simple-canvas.html

@@ -1,26 +1,21 @@
-package com.example.HeadTorsoLegs;
+package com.example.HeadTorsoLegs.activites;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.FirebaseError;
+import com.example.headtorsolegs.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import com.google.gson.Gson;
-import com.example.headtorsolegs.R;
-
-import static com.example.HeadTorsoLegs.MyConstants.MAX_NUM_PLAYERS;
+import static com.example.HeadTorsoLegs.Types.MyConstants.MAX_NUM_PLAYERS;
 
 public class WaitingRoomActivity extends Activity {
 
@@ -65,14 +60,11 @@ public class WaitingRoomActivity extends Activity {
         DBRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                //System.out.println(snapshot.getValue());
-                Log.i("waitingRoom", "onDataChange: " + snapshot.getValue());
-                Log.i("waitingRoom", "playerName: " + snapshot.child("playerName").getValue().toString());
                 updatePlayers(snapshot.child("playerName").getValue().toString(), 1);
+                //todo move playerName to MyConstants
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //System.out.println("The read failed: " + databaseError.toString());
                 Log.i("waitingRoom", "onCancelled: " + databaseError.toString());
             }
         });
@@ -90,6 +82,7 @@ public class WaitingRoomActivity extends Activity {
 
     }
 
+    //todo delete
     public void displayMessage(String message) {
         TextView usernameTextView = (TextView) findViewById(R.id.textViewHeads);
         usernameTextView.setText(message);

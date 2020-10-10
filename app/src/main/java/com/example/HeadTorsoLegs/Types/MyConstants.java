@@ -1,4 +1,4 @@
-package com.example.HeadTorsoLegs;
+package com.example.HeadTorsoLegs.Types;
 
 public final class MyConstants {
     public static final String SharedPREFERENCE = "SharedPreference" ;

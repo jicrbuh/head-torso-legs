@@ -1,19 +1,24 @@
-package com.example.HeadTorsoLegs;
+package com.example.HeadTorsoLegs.activites;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import com.google.firebase.database.*;
-import com.google.gson.Gson;
+
+import com.example.HeadTorsoLegs.Types.GameData;
+import com.example.HeadTorsoLegs.Types.MyConstants;
+import com.example.HeadTorsoLegs.Types.UserData;
 import com.example.headtorsolegs.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
 public class NewGameActivity extends Activity {
     SharedPreferences sharedpreferences;
@@ -23,9 +28,6 @@ public class NewGameActivity extends Activity {
     GameData gameData;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference DBRef = database.getReference("game-data");
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,8 @@ public class NewGameActivity extends Activity {
                 editor.putString(MyConstants.UserDataKEY, userDataJson);
                 editor.commit();
 
-                // push to FB
+                // push to FB - fix all to the singleton
+                //todo maybe can get rid of sharedprefrence
                 FirebaseDatabase dataBase = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = dataBase.getReference("GAME");
                 myRef.setValue(userData);

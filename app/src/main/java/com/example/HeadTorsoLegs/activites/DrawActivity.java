@@ -1,4 +1,4 @@
-package com.example.HeadTorsoLegs;
+package com.example.HeadTorsoLegs.activites;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,15 +8,19 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.*;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import android.widget.Toast;
+import com.example.HeadTorsoLegs.Types.MyConstants;
+import com.example.HeadTorsoLegs.Types.UserData;
+import com.example.HeadTorsoLegs.views.DrawView;
 import com.example.headtorsolegs.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
@@ -25,6 +29,8 @@ import java.io.ByteArrayOutputStream;
 public class DrawActivity extends Activity {
     //https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-11-canvas/11-1a-p-create-a-simple-canvas/11-1a-p-create-a-simple-canvas.html
     Button buttonFinished;
+    //todo move to singleton
+    //todo in DB singleton - two methods - two static one for storage and one for DB
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference("test/");
     StorageReference drawingRef;
@@ -36,6 +42,7 @@ public class DrawActivity extends Activity {
         String userDataJson = sharedpreferences.getString(MyConstants.UserDataKEY, "");
         UserData userData = gson.fromJson(userDataJson, UserData.class);
         drawingRef = storageRef.child("drawing_" + userData.getDrawingPosition() + ".jpg");
+        // todo move all string consts to MyConstants
     }
 
     private void uploadDrawView(DrawView drawView) {
@@ -61,6 +68,7 @@ public class DrawActivity extends Activity {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 // ...
+                //todo maybe intent here
             }
         });
     }

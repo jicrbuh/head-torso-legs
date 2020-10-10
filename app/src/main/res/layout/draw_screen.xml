@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.HeadTorsoLegs.MainActivity">
+    tools:context="com.example.HeadTorsoLegs.activites.MainActivity">
 
     <LinearLayout
 
@@ -19,7 +19,7 @@
             android:textSize="40dp"
             android:text="@string/draw" />
 
-        <com.example.HeadTorsoLegs.DrawView
+        <com.example.HeadTorsoLegs.views.DrawView
             android:id="@+id/myimageview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

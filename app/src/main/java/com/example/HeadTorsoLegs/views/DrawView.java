@@ -1,19 +1,12 @@
-package com.example.HeadTorsoLegs;
+package com.example.HeadTorsoLegs.views;
 //package com.journaldev.androidcanvasbasics;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
-import android.graphics.RectF;
-import android.graphics.Region;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 

@@ -1,4 +1,4 @@
-package com.example.HeadTorsoLegs;
+package com.example.HeadTorsoLegs.Types;
 
 import android.util.Log;
 
