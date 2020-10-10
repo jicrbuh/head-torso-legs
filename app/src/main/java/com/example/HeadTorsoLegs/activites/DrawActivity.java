@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,6 +33,11 @@ public class DrawActivity extends Activity {
     private FBConnect fbConnect = FBConnect.FBConnect();
     StorageReference storageRef = fbConnect.getStorageReference();
     StorageReference drawingRef;
+    private Activity activity;
+    private View curView;
+    Intent intent;
+
+
 
 
     private void createDrawingRef() {
@@ -54,10 +60,12 @@ public class DrawActivity extends Activity {
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = drawingRef.putBytes(data);
+
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
+                Log.i("uploadimg", "failure" );
                 Toast.makeText(getApplicationContext(), "Failed to Upload: please try again", Toast.LENGTH_LONG).show();
 
             }
@@ -66,9 +74,14 @@ public class DrawActivity extends Activity {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 // ...
-                //todo maybe intent here
+                Log.i("uploadimg", "success" );
+                curView.getContext().startActivity(intent);
+
+
             }
         });
+
+
     }
 
 
@@ -82,13 +95,18 @@ public class DrawActivity extends Activity {
         buttonFinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                curView = view;
+                intent = new Intent(view.getContext(), AfterDrawingActivity.class);
                 final DrawView drawing = findViewById(R.id.myimageview);
                 createDrawingRef();
                 uploadDrawView(drawing);
 
+
                 // go to after drawing room
-                Intent intent = new Intent(view.getContext(), AfterDrawingActivity.class);
-                view.getContext().startActivity(intent);
+
+                //Intent intent = new Intent(view.getContext(), AfterDrawingActivity.class);
+                //view.getContext().startActivity(intent);
+
             }
         });
     }
