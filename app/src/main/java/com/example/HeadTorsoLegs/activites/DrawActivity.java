@@ -38,8 +38,6 @@ public class DrawActivity extends Activity {
     Intent intent;
 
 
-
-
     private void createDrawingRef() {
         Gson gson = new Gson();
         SharedPreferences sharedpreferences = getSharedPreferences(MyConstants.SharedPREFERENCE, Context.MODE_PRIVATE);
@@ -73,15 +71,12 @@ public class DrawActivity extends Activity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
                 Log.i("uploadimg", "success" );
                 curView.getContext().startActivity(intent);
 
 
             }
         });
-
-
     }
 
 
@@ -100,12 +95,6 @@ public class DrawActivity extends Activity {
                 final DrawView drawing = findViewById(R.id.myimageview);
                 createDrawingRef();
                 uploadDrawView(drawing);
-
-
-                // go to after drawing room
-
-                //Intent intent = new Intent(view.getContext(), AfterDrawingActivity.class);
-                //view.getContext().startActivity(intent);
 
             }
         });

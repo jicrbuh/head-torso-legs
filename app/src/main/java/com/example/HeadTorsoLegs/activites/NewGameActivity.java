@@ -38,12 +38,9 @@ public class NewGameActivity extends Activity {
         editTextName = findViewById(R.id.editTextName);
         buttonCreate =(Button)findViewById(R.id.buttonCreate);
 
+        // save game data to FB DB
         gameData = new GameData();
-
-        DatabaseReference gameRef = fbConnect.getDBRef().child("game2");
-        Log.i("gameData", "onCreate: headdrawing - " + gameData.getHeadDrawing());
-        gameRef.setValue(gameData);
-
+        gameData.saveGameDataToFB();
 
 
         editTextName.addTextChangedListener(new TextWatcher() {
@@ -83,7 +80,7 @@ public class NewGameActivity extends Activity {
 
                 // push to FB - fix all to the singleton
                 //todo maybe can get rid of sharedprefrence
-                fbConnect.getDBRef().setValue(userData);
+                //fbConnect.getDBRef().setValue(userData);
 
                 // go to waiting room
                 Intent intent = new Intent(view.getContext(), WaitingRoomActivity.class);

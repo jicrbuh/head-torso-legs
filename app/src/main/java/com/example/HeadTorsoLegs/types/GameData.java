@@ -2,6 +2,11 @@ package com.example.HeadTorsoLegs.types;
 
 import android.util.Log;
 
+import com.example.HeadTorsoLegs.utilities.FBConnect;
+import com.google.firebase.database.DatabaseReference;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameData {
@@ -11,15 +16,18 @@ public class GameData {
     //private String DrawingPosition;
     //private String GameProgression;
     //private String PushToken;
-    private String GameCode;
-    private String HeadDrawing;
-    private String TorsoDrawing;
-    private String LegsDrawing;
-    private String GameProgression;
-    private String FinalDrawing;
-    private List<UserData> Users;
+    private String gameCode;
+    private String headDrawing;
+    private String[] myArr;
+    private String torsoDrawing;
+    private String legsDrawing;
+    private String gameProgression;
+    private String finalDrawing;
+    //private List<UserData> users;
+    //private UserData user;
 
     final private static int CODE_LEN = 4;
+    private static FBConnect fbConnect = FBConnect.FBConnect();
 /*
     public void setPlayerName(String playerName) {
         PlayerName = playerName;
@@ -53,37 +61,60 @@ public class GameData {
     }
 */
     public String getGameCode() {
-        return GameCode;
-    }
-/*
-    public String getGameProgression() {
-        return GameProgression;
+        return gameCode;
     }
 
-    public String getPushToken() {
-        return PushToken;
-    }
-*/
     public void setGameCode(String gameCode) {
-        GameCode = gameCode;
+        this.gameCode = gameCode;
     }
 
     public void setHeadDrawing(String headDrawing) {
-        HeadDrawing = headDrawing;
+        this.headDrawing = headDrawing;
     }
 
     public String getHeadDrawing() {
-        return this.HeadDrawing;
+        return this.headDrawing;
     }
+
+    public void setLegsDrawing(String legsDrawing) {
+        this.legsDrawing = legsDrawing;
+    }
+
+    public String getLegsDrawing() {
+        return this.legsDrawing;
+    }
+
+    public void setTorsoDrawing(String torsoDrawing) {
+        this.torsoDrawing = torsoDrawing;
+    }
+
+    public String getTorsoDrawing() {
+        return this.torsoDrawing;
+    }
+
+    public String[] getMyArr() { return myArr; }
+
+    public void setMyArr(String[] myArr) { this.myArr = myArr; }
 
     public GameData() {
         //this.PlayerName = name;
         //this.PlayerNum = -1;
-        this.HeadDrawing = "df";
-        this.GameCode = createRandCode();
+        this.headDrawing = "df";
+        this.legsDrawing = "df";
+        this.gameCode = createRandCode();
+
+        //this.myArr = new String[]{"0", "1"};
+        //this.user = new UserData("standalone");
         //this.PushToken = null;
         //this.GameProgression = null;
     }
+
+    public void saveGameDataToFB() {
+        DatabaseReference DBRef = fbConnect.getDBRef();
+        DatabaseReference gameRef = fbConnect.getDBRef().child("game2");
+        gameRef.setValue(this);
+    }
+
 
     private String createRandCode() {
         final String ALPHA_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
