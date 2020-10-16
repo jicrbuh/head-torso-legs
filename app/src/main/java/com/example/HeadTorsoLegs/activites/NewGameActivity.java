@@ -74,14 +74,18 @@ public class NewGameActivity extends Activity {
 
                 String userName = editTextName.getText().toString();
                 userData = new UserData(userName);
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                String userDataJson = new Gson().toJson(userData);
-                editor.putString(MyConstants.UserDataKEY, userDataJson);
-                editor.commit();
 
                 // push to FB - fix all to the singleton
                 //todo maybe can get rid of sharedprefrence
                 fbConnect.getDBRef().child("readUser").setValue(userData);
+                userData.saveNewUserToFB();
+
+
+                // save userData to sharedPreferences
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                String userDataJson = new Gson().toJson(userData);
+                editor.putString(MyConstants.UserDataKEY, userDataJson);
+                editor.commit();
 
                 // go to waiting room
                 Intent intent = new Intent(view.getContext(), WaitingRoomActivity.class);

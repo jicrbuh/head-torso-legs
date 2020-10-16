@@ -33,21 +33,7 @@ public class GameData {
     final private static int CODE_LEN = 4;
     private static FBConnect fbConnect = FBConnect.FBConnect();
 
-    public enum BodyPart{
-        HEAD("head"),
-        TORSO("torso"),
-        LEGS("legs");
 
-        private String name;
-
-        BodyPart(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
 
     public void setDrawingPosition(String drawingPosition) { DrawingPosition = drawingPosition; }
 
@@ -103,46 +89,8 @@ public class GameData {
         DatabaseReference DBRef = fbConnect.getDBRef();
         DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
         gameRef.setValue(this);
-        saveNewUserToFB();
     }
 
-    public void saveNewUserToFB() {
-
-        DatabaseReference DBRef = fbConnect.getDBRef();
-        final DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
-        DatabaseReference usersRef = gameRef.child("head");             // todo all strings to const somewhere
-        //Map<String, UserData> usersMap = new HashMap<>();
-        //usersMap.put("alanisawesome", new UserData("Alan Turing"));
-        UserData lastUser;
-        // if no head, save in userData as head
-        gameRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //parse data to recycler view adapter and call notifyDatasetChange()
-                
-                if (dataSnapshot.child(BodyPart.HEAD.getName()).getValue() == null) {
-                    Log.i("readFB", "dataSnapshot.child(\"head\").getValue(): " + dataSnapshot.child("head").getValue());
-                    gameRef.child(BodyPart.HEAD.getName()).setValue(new UserData("Alan Turing"));
-                }
-                else if (dataSnapshot.child(BodyPart.TORSO.getName()).getValue() == null) {
-                    Log.i("readFB", "dataSnapshot.child(\"torso\").getValue(): " + dataSnapshot.child("torso").getValue());
-                    gameRef.child(BodyPart.TORSO.getName()).setValue(new UserData("Alan Turing"));
-                }
-                else if (dataSnapshot.child(BodyPart.LEGS.getName()).getValue() == null) {
-                    Log.i("readFB", "dataSnapshot.child(\"legs\").getValue(): " + dataSnapshot.child("legs").getValue());
-                    gameRef.child(BodyPart.LEGS.getName()).setValue(new UserData("Alan Turing"));
-                }
-                else {
-                    // error - no slots available for new player
-                }
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-
-        //usersRef.setValue(usersMap);
-    }
 
 
     private String createRandCode() {
@@ -156,5 +104,6 @@ public class GameData {
         Log.i("GameCode", "createRandCode: " + builder.toString());
         return builder.toString();
     }
+
 
 }
