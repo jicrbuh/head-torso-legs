@@ -43,6 +43,7 @@ public class NewGameActivity extends Activity {
         gameData.saveGameDataToFB();
 
 
+        // make button enabled only if the name is not empty
         editTextName.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -80,7 +81,7 @@ public class NewGameActivity extends Activity {
 
                 // push to FB - fix all to the singleton
                 //todo maybe can get rid of sharedprefrence
-                //fbConnect.getDBRef().setValue(userData);
+                fbConnect.getDBRef().child("readUser").setValue(userData);
 
                 // go to waiting room
                 Intent intent = new Intent(view.getContext(), WaitingRoomActivity.class);

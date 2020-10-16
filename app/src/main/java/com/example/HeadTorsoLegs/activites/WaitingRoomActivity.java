@@ -57,7 +57,7 @@ public class WaitingRoomActivity extends Activity {
         fbConnect.getDBRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                updatePlayers(snapshot.child("playerName").getValue().toString(), 1);
+                updatePlayers(snapshot.child("readUser").child("playerName").getValue().toString(), 1);
                 //todo move playerName to MyConstants
             }
             @Override
