@@ -20,27 +20,18 @@
             android:text="@string/creation" />
 
         <ImageView
-            android:id="@+id/creation"
+            android:id="@+id/headCreation"
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="3"
             tools:src="@sample/test.bmp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center|bottom"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/buttonJoin"
+        <ImageView
+            android:id="@+id/legsCreation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:background="@drawable/rounded_corners"
-            android:text="@string/share" />
-    </LinearLayout>
+            android:layout_height="0px"
+            android:layout_weight="3"
+            tools:src="@sample/test.bmp" />
 
     </LinearLayout>
 

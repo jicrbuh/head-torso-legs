@@ -95,8 +95,6 @@ public class WaitingRoomActivity extends Activity {
                 view.getContext().startActivity(intent);
             }
             });
-
-
     }
 
     //todo delete

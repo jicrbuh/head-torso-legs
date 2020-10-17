@@ -34,15 +34,11 @@ public class JoinGameActivity extends Activity {
             public void onClick(View view) {
 
                 String userName = editTextName.getText().toString();
-                UserData userData = new UserData(userName, "", UserData.BodyPart.LEGS.ordinal());
-                userData.makeLegs();
-
-                // push to FB - fix all to the singleton
-                //todo maybe can get rid of sharedprefrence
-                fbConnect.getDBRef().child("readUser").setValue(userData);
+                UserData userLegs = new UserData(userName, "", UserData.BodyPart.LEGS.ordinal());
+                userLegs.makeLegs();
 
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                String userDataJson = new Gson().toJson(userData);
+                String userDataJson = new Gson().toJson(userLegs);
                 editor.putString(MyConstants.UserDataKEY, userDataJson);
                 editor.commit();
 

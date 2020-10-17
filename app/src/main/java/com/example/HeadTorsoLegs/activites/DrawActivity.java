@@ -32,25 +32,31 @@ public class DrawActivity extends Activity {
     Button buttonFinished;
     private FBConnect fbConnect = FBConnect.FBConnect();
     StorageReference storageRef = fbConnect.getStorageReference();
-    StorageReference drawingRef;
     private Activity activity;
     private View curView;
     Intent intent;
 
 
-    private void createDrawingRef() {
+    private StorageReference createDrawingRef(String imgName) {
+        StorageReference drawingRef;
+        drawingRef = storageRef.child(imgName);
+        return drawingRef;
+    }
+
+    private String createImgName() {
+        String imgName;
         Gson gson = new Gson();
         SharedPreferences sharedpreferences = getSharedPreferences(MyConstants.SharedPREFERENCE, Context.MODE_PRIVATE);
         String userDataJson = sharedpreferences.getString(MyConstants.UserDataKEY, "");
         UserData userData = gson.fromJson(userDataJson, UserData.class);
-        Log.i("chen", "createDrawingRef: userData.getPlayerNum(): "+ userData.getPlayerNum());
-        Log.i("chen", "createDrawingRef: UserData.BodyPart.values()[userData.getPlayerNum()]: "+ UserData.BodyPart.values()[userData.getPlayerNum()]);
-        drawingRef = storageRef.child("drawing_" + UserData.BodyPart.values()[userData.getPlayerNum()].getName() + ".jpg");
-        //drawingRef = storageRef.child("drawing_" + userData.getDrawingPosition() + ".jpg");
-        // todo move all string consts to MyConstants
+        String bodyPart = UserData.BodyPart.values()[userData.getPlayerNum()].getName();
+        imgName = userData.getPlayerName() + "_" + bodyPart + ".jpg";
+        return imgName;
     }
 
     private void uploadDrawView(DrawView drawView) {
+        final String imgName = createImgName();
+        final StorageReference drawingRef = createDrawingRef(imgName);
 
         // Get the data from an ImageView as bytes
         drawView.setDrawingCacheEnabled(true);
@@ -69,19 +75,30 @@ public class DrawActivity extends Activity {
                 Log.i("uploadimg", "failure" );
                 Toast.makeText(getApplicationContext(), "Failed to Upload: please try again", Toast.LENGTH_LONG).show();
 
+
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 Log.i("uploadimg", "success" );
+                updateDrawingInDB(imgName);
+
+                // Go to next screen
                 curView.getContext().startActivity(intent);
-
-
             }
         });
     }
 
+    private void updateDrawingInDB(String imgName) {
+        Gson gson = new Gson();
+        SharedPreferences sharedpreferences = getSharedPreferences(MyConstants.SharedPREFERENCE, Context.MODE_PRIVATE);
+        String userDataJson = sharedpreferences.getString(MyConstants.UserDataKEY, "");
+        UserData userData = gson.fromJson(userDataJson, UserData.class);
+        UserData.BodyPart bodyPart = UserData.BodyPart.values()[userData.getPlayerNum()];
+        String imgPath = imgName;
+        fbConnect.getDBRef().child("game2").child(bodyPart.getName() + "Drawing").setValue(imgName);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +113,6 @@ public class DrawActivity extends Activity {
                 curView = view;
                 intent = new Intent(view.getContext(), AfterDrawingActivity.class);
                 final DrawView drawing = findViewById(R.id.myimageview);
-                createDrawingRef();
                 uploadDrawView(drawing);
 
             }

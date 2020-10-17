@@ -24,7 +24,6 @@ public class FBConnect {
     private StorageReference storageReference;
 
 
-
     private FBConnect() {
         database = FirebaseDatabase.getInstance();
         DBRef = database.getReference(baseDBPath);
@@ -49,21 +48,6 @@ public class FBConnect {
             singleInstance = new FBConnect();
 
         return singleInstance;
-    }
-
-    public void readData(final FBCallback myCallback) {
-        DatabaseReference temp = this.getDBRef().child("game2").child("head");
-        this.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.i("chen", "readData: dataSnapshot.child(\"playerName\").getValue(): " + dataSnapshot.child("playerName").getValue());
-                String value = dataSnapshot.child("playerName").getValue().toString();
-                myCallback.onCallback(value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
     }
 }
 

@@ -28,15 +28,11 @@ public class UserData {
         LEGS("legs");
 
         private String name;
-        private int val;
 
         BodyPart(String name) { this.name = name; }
 
         public String getName() { return name; }
 
-        private BodyPart(int val) { this.val = val; }
-
-        public int getVal() { return val; }
     }
 
     public void setPlayerName(String playerName) {
@@ -98,28 +94,6 @@ public class UserData {
         saveNewUserToFB();
     }
 
-
-    public void saveHeadToFB() {
-        DatabaseReference DBRef = fbConnect.getDBRef();
-        DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
-
-        Log.i("chen", "this.getPlayerNum(): "  + this.getPlayerNum());
-        Log.i("chen", "saveNewUserToFB: is head " + this.getPlayerName());
-        gameRef.child(BodyPart.HEAD.getName()).setValue(this);
-
-    }
-
-    public void saveLegsToDB() {
-        DatabaseReference DBRef = fbConnect.getDBRef();
-        DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
-
-        Log.i("chen", "this.getPlayerNum(): "  + this.getPlayerNum());
-        Log.i("chen", "BodyPart.LEGS.getName() "+ BodyPart.LEGS.getName());
-
-        gameRef.child(BodyPart.LEGS.getName()).setValue(this);
-
-
-    }
 
     public void saveNewUserToFB() {
 

@@ -75,7 +75,7 @@ public class GameData {
         //this.PlayerName = name;
         //this.PlayerNum = -1;
         this.headDrawing = "df";
-        this.legsDrawing = "df";
+        this.legsDrawing = "dsf_head.jpg";
         this.gameCode = createRandCode();
         this.head = null;
 

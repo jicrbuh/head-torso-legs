@@ -3,11 +3,18 @@ package com.example.HeadTorsoLegs.activites;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.HeadTorsoLegs.types.UserData;
+import com.example.HeadTorsoLegs.utilities.AsyncStr;
 import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.headtorsolegs.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 public class ShowCreationActivity extends Activity {
@@ -19,18 +26,42 @@ public class ShowCreationActivity extends Activity {
         img.setImageResource(R.drawable.flower);
     }
 
+    private void getImgRef(final UserData.BodyPart bodyPart) {
 
-    private void loadImageFB() {
+        fbConnect.getDBRef().child("game2").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                StorageReference imgRef = null;
 
-        // Reference to an image file in Cloud Storage
+                if (dataSnapshot.child((bodyPart.getName() + "Drawing")).getValue() != null) {
+                    String pathString = dataSnapshot.child(bodyPart.getName() + "Drawing").getValue().toString();
+                    //StorageReference storageReference = fbConnect.getStorageReference();
+                    //imgRef = storageReference.child(pathString);
+                    loadImageFB(bodyPart, pathString);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+    }
+
+    private void loadImageFB(final UserData.BodyPart bodyPart, String pathString) {
+        //old way
         StorageReference storageReference = fbConnect.getStorageReference();
-        StorageReference imgReference = storageReference.child("test/mountains.jpg");
-        // ImageView in your Activity
-        ImageView imageView = (ImageView) findViewById(R.id.creation);
+        StorageReference imgReference = storageReference.child(pathString);
+        ImageView imageView;
+        if (bodyPart == UserData.BodyPart.HEAD) {
+            imageView = (ImageView) findViewById(R.id.headCreation);
+        }
+        else {
+            imageView = (ImageView) findViewById(R.id.legsCreation);
+        }
 
-        // Download directly from StorageReference using Glide
-        // (See MyAppGlideModule for Loader registration)
         Glide.with(this).load(imgReference).into(imageView);
+
 
     }
 
@@ -40,15 +71,8 @@ public class ShowCreationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.creation);
 
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                ImageView img= (ImageView) findViewById(R.id.creation);
-                loadImageFB();
-                //img.setImageResource(R.drawable.flower);
-            }
-        }, 1000);
+        getImgRef(UserData.BodyPart.HEAD);
+        getImgRef(UserData.BodyPart.LEGS);
 
     }
 
