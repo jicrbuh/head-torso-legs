@@ -30,21 +30,13 @@ public class UserData {
         private String name;
         private int val;
 
-        BodyPart(String name) {
-            this.name = name;
-        }
+        BodyPart(String name) { this.name = name; }
 
-        public String getName() {
-            return name;
-        }
+        public String getName() { return name; }
 
-        private BodyPart(int val) {
-            this.val = val;
-        }
+        private BodyPart(int val) { this.val = val; }
 
-        public int getVal() {
-            return val;
-        }
+        public int getVal() { return val; }
     }
 
     public void setPlayerName(String playerName) {
@@ -96,53 +88,64 @@ public class UserData {
     }
 
 
-    public UserData(String name) {
+    public UserData(String name, String gameCode, int playerNum) {
         this.PlayerName = name;
-        this.PlayerNum = -1;
         this.DrawingPosition = null;
-        this.GameCode = null;
+        this.PlayerNum = playerNum;
+        this.GameCode = gameCode;
         this.PushToken = null;
         this.GameProgression = null;
+        saveNewUserToFB();
     }
 
+
+    public void saveHeadToFB() {
+        DatabaseReference DBRef = fbConnect.getDBRef();
+        DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
+
+        Log.i("chen", "this.getPlayerNum(): "  + this.getPlayerNum());
+        Log.i("chen", "saveNewUserToFB: is head " + this.getPlayerName());
+        gameRef.child(BodyPart.HEAD.getName()).setValue(this);
+
+    }
+
+    public void saveLegsToDB() {
+        DatabaseReference DBRef = fbConnect.getDBRef();
+        DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
+
+        Log.i("chen", "this.getPlayerNum(): "  + this.getPlayerNum());
+        Log.i("chen", "BodyPart.LEGS.getName() "+ BodyPart.LEGS.getName());
+
+        gameRef.child(BodyPart.LEGS.getName()).setValue(this);
+
+
+    }
 
     public void saveNewUserToFB() {
 
         DatabaseReference DBRef = fbConnect.getDBRef();
-        final DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
+        DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
 
-        // if no head, save in userData as head
-        gameRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        if (this.getPlayerNum() == BodyPart.HEAD.ordinal()) {
+            Log.i("chen", "this.getPlayerNum(): "  + this.getPlayerNum());
+            Log.i("chen", "saveNewUserToFB: is head " + this.getPlayerName());
+            gameRef.child(BodyPart.HEAD.getName()).setValue(this);
+        }
+        else if (this.getPlayerNum() == BodyPart.LEGS.ordinal()) {
+            Log.i("chen", "this.getPlayerNum(): "  + this.getPlayerNum());
+            Log.i("chen", "saveNewUserToFB: is legs "+ this.getPlayerName());
+            gameRef.child(BodyPart.LEGS.getName()).setValue(this);
+        }
 
-                setGameCode(dataSnapshot.child("gameCode").getValue().toString());
+    }
 
-                if (dataSnapshot.child(BodyPart.HEAD.getName()).getValue() == null) {
-                    Log.i("readFB", "dataSnapshot.child(\"head\").getValue(): " + dataSnapshot.child("head").getValue());
-                    UserData.this.setPlayerNum(BodyPart.HEAD.getVal());
-                    gameRef.child(BodyPart.HEAD.getName()).setValue(UserData.this);
+    public void makeHead() {
+        this.setPlayerNum(0);
+        this.setDrawingPosition(BodyPart.HEAD.getName());
+    }
 
-                } else if (dataSnapshot.child(BodyPart.TORSO.getName()).getValue() == null) {
-                    Log.i("readFB", "dataSnapshot.child(\"torso\").getValue(): " + dataSnapshot.child("torso").getValue());
-                    UserData.this.setPlayerNum(BodyPart.TORSO.getVal());
-                    gameRef.child(BodyPart.TORSO.getName()).setValue(UserData.this);
-
-                } else if (dataSnapshot.child(BodyPart.LEGS.getName()).getValue() == null) {
-                    Log.i("readFB", "dataSnapshot.child(\"legs\").getValue(): " + dataSnapshot.child("legs").getValue());
-                    UserData.this.setPlayerNum(BodyPart.LEGS.getVal());
-                    gameRef.child(BodyPart.LEGS.getName()).setValue(UserData.this);
-
-                } else {
-                    // error - no slots available for new player
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
+    public void makeLegs() {
+        this.setPlayerNum(1);
+        this.setDrawingPosition(BodyPart.LEGS.getName());
     }
 }

@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,12 +16,11 @@ import com.example.HeadTorsoLegs.types.MyConstants;
 import com.example.HeadTorsoLegs.types.UserData;
 import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.headtorsolegs.R;
-import com.google.firebase.database.DatabaseReference;
 import com.google.gson.Gson;
 
 public class NewGameActivity extends Activity {
     SharedPreferences sharedpreferences;
-    UserData userData;
+    UserData userHead;
     Button buttonCreate;
     EditText editTextName;
     GameData gameData;
@@ -73,17 +71,24 @@ public class NewGameActivity extends Activity {
             public void onClick(View view) {
 
                 String userName = editTextName.getText().toString();
-                userData = new UserData(userName);
+                userHead = new UserData(userName, gameData.getGameCode(), UserData.BodyPart.HEAD.ordinal());
+                userHead.makeHead();
 
                 // push to FB - fix all to the singleton
                 //todo maybe can get rid of sharedprefrence
-                fbConnect.getDBRef().child("readUser").setValue(userData);
-                userData.saveNewUserToFB();
-
+                //fbConnect.getDBRef().child("readUser").setValue(userHead);
 
                 // save userData to sharedPreferences
+                /*
+                fbConnect.readData(new FBCallback() {
+                    @Override
+                    public void onCallback(String value) {
+                        Log.d("chen", "weird thing: "+  value);
+                    }
+                });*/
+
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                String userDataJson = new Gson().toJson(userData);
+                String userDataJson = new Gson().toJson(userHead);
                 editor.putString(MyConstants.UserDataKEY, userDataJson);
                 editor.commit();
 

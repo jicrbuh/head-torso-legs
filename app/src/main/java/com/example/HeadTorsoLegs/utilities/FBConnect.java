@@ -1,7 +1,12 @@
 package com.example.HeadTorsoLegs.utilities;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 public class FBConnect {
@@ -46,6 +51,19 @@ public class FBConnect {
         return singleInstance;
     }
 
+    public void readData(final FBCallback myCallback) {
+        DatabaseReference temp = this.getDBRef().child("game2").child("head");
+        this.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.i("chen", "readData: dataSnapshot.child(\"playerName\").getValue(): " + dataSnapshot.child("playerName").getValue());
+                String value = dataSnapshot.child("playerName").getValue().toString();
+                myCallback.onCallback(value);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+    }
 }
 

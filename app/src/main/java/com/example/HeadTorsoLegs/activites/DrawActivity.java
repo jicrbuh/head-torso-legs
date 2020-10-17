@@ -43,7 +43,10 @@ public class DrawActivity extends Activity {
         SharedPreferences sharedpreferences = getSharedPreferences(MyConstants.SharedPREFERENCE, Context.MODE_PRIVATE);
         String userDataJson = sharedpreferences.getString(MyConstants.UserDataKEY, "");
         UserData userData = gson.fromJson(userDataJson, UserData.class);
-        drawingRef = storageRef.child("drawing_" + UserData.BodyPart.values()[userData.getPlayerNum()] + ".jpg");
+        Log.i("chen", "createDrawingRef: userData.getPlayerNum(): "+ userData.getPlayerNum());
+        Log.i("chen", "createDrawingRef: UserData.BodyPart.values()[userData.getPlayerNum()]: "+ UserData.BodyPart.values()[userData.getPlayerNum()]);
+        drawingRef = storageRef.child("drawing_" + UserData.BodyPart.values()[userData.getPlayerNum()].getName() + ".jpg");
+        //drawingRef = storageRef.child("drawing_" + userData.getDrawingPosition() + ".jpg");
         // todo move all string consts to MyConstants
     }
 
