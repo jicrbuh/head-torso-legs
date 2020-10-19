@@ -2,8 +2,6 @@ package com.example.HeadTorsoLegs.activites;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -30,7 +28,7 @@ public class ShowCreationActivity extends Activity {
 
     private void getImgRef(final UserData.BodyPart bodyPart) {
 
-        fbConnect.getDBRef().child("game2").addListenerForSingleValueEvent(new ValueEventListener() {
+        fbConnect.getDBRef().child(fbConnect.subGamePath).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 StorageReference imgRef = null;

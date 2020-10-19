@@ -53,7 +53,7 @@ public class WaitingRoomActivity extends Activity {
     private void addPlayersListener() {
         // Add listener to the DB
         Log.i("chen", "Head: " + UserData.BodyPart.HEAD.ordinal() + " Legs: " + UserData.BodyPart.LEGS.ordinal());
-        fbConnect.getDBRef().child("game2").addValueEventListener(new ValueEventListener() {
+        fbConnect.getDBRef().child(fbConnect.subGamePath).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Log.i("chen", "addPlayersListener: "  + snapshot.getValue().toString());

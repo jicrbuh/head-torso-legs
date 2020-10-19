@@ -14,6 +14,7 @@ public class FBConnect {
     private static FBConnect singleInstance = null;
     final static private String baseDBPath = "game-data";
     final static private String baseStoragePath = "test";
+    final static public String subGamePath = "game2";
 
     // FB database
     private FirebaseDatabase database;

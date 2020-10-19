@@ -3,16 +3,7 @@ package com.example.HeadTorsoLegs.types;
 import android.util.Log;
 
 import com.example.HeadTorsoLegs.utilities.FBConnect;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class GameData {
 
@@ -79,7 +70,7 @@ public class GameData {
 
     public void saveGameDataToFB() {
         DatabaseReference DBRef = fbConnect.getDBRef();
-        DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
+        DatabaseReference gameRef = fbConnect.getDBRef().child(fbConnect.subGamePath);
         gameRef.setValue(this);
     }
 
@@ -87,6 +78,7 @@ public class GameData {
 
     private String createRandCode() {
         final String ALPHA_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
         StringBuilder builder = new StringBuilder();
         int cnt = CODE_LEN;
         while (cnt-- != 0) {

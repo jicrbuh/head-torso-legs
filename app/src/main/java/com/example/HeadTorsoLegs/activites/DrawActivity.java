@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 
+import static com.example.HeadTorsoLegs.types.MyConstants.DRAWING;
 import static com.example.HeadTorsoLegs.types.MyConstants.JPG;
 import static com.example.HeadTorsoLegs.types.MyConstants.UNDERSCORE;
 
@@ -100,7 +101,7 @@ public class DrawActivity extends Activity {
         UserData userData = gson.fromJson(userDataJson, UserData.class);
         UserData.BodyPart bodyPart = UserData.BodyPart.values()[userData.getPlayerNum()];
         String imgPath = imgName;
-        fbConnect.getDBRef().child("game2").child(bodyPart.getName() + "Drawing").setValue(imgName);
+        fbConnect.getDBRef().child(fbConnect.subGamePath).child(bodyPart.getName() + DRAWING).setValue(imgName);
     }
 
     @Override

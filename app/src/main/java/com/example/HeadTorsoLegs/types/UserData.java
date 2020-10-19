@@ -98,7 +98,7 @@ public class UserData {
     public void saveNewUserToFB() {
 
         DatabaseReference DBRef = fbConnect.getDBRef();
-        DatabaseReference gameRef = fbConnect.getDBRef().child("game2"); // todo all strings to const somewhere
+        DatabaseReference gameRef = fbConnect.getDBRef().child(fbConnect.subGamePath); // todo all strings to const somewhere
 
         if (this.getPlayerNum() == BodyPart.HEAD.ordinal()) {
             Log.i("chen", "this.getPlayerNum(): "  + this.getPlayerNum());
