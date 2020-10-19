@@ -21,11 +21,8 @@ public class GameData {
     private String PushToken;
     private String gameCode;
     private String headDrawing;
-    private String[] myArr;
     private String torsoDrawing;
     private String legsDrawing;
-    private String gameProgression;
-    private String finalDrawing;
     private UserData head;
     private UserData torso;
     private UserData legs;
@@ -72,17 +69,12 @@ public class GameData {
     public void setLegs(UserData legs) { this.legs = legs; }
 
     public GameData() {
-        //this.PlayerName = name;
-        //this.PlayerNum = -1;
-        this.headDrawing = "df";
-        this.legsDrawing = "dsf_head.jpg";
+
+        this.headDrawing = "";
+        this.legsDrawing = "legs_head.jpg";
         this.gameCode = createRandCode();
         this.head = null;
 
-        //this.myArr = new String[]{"0", "1"};
-        //this.user = new UserData("standalone");
-        //this.PushToken = null;
-        //this.GameProgression = null;
     }
 
     public void saveGameDataToFB() {

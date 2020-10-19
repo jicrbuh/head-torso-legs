@@ -12,8 +12,8 @@ import com.google.firebase.storage.StorageReference;
 public class FBConnect {
 
     private static FBConnect singleInstance = null;
-    final private String baseDBPath = "game-data";
-    final private String baseStoragePath = "test";
+    final static private String baseDBPath = "game-data";
+    final static private String baseStoragePath = "test";
 
     // FB database
     private FirebaseDatabase database;

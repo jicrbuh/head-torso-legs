@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
+import static com.example.HeadTorsoLegs.types.MyConstants.DRAWING;
+
 public class ShowCreationActivity extends Activity {
     //https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-11-canvas/11-1a-p-create-a-simple-canvas/11-1a-p-create-a-simple-canvas.html
     private FBConnect fbConnect = FBConnect.FBConnect();
@@ -33,10 +35,8 @@ public class ShowCreationActivity extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 StorageReference imgRef = null;
 
-                if (dataSnapshot.child((bodyPart.getName() + "Drawing")).getValue() != null) {
-                    String pathString = dataSnapshot.child(bodyPart.getName() + "Drawing").getValue().toString();
-                    //StorageReference storageReference = fbConnect.getStorageReference();
-                    //imgRef = storageReference.child(pathString);
+                if (dataSnapshot.child((bodyPart.getName() + DRAWING)).getValue() != null) {
+                    String pathString = dataSnapshot.child(bodyPart.getName() + DRAWING).getValue().toString();
                     loadImageFB(bodyPart, pathString);
                 }
 

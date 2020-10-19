@@ -26,6 +26,9 @@ import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 
+import static com.example.HeadTorsoLegs.types.MyConstants.JPG;
+import static com.example.HeadTorsoLegs.types.MyConstants.UNDERSCORE;
+
 
 public class DrawActivity extends Activity {
     //https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-11-canvas/11-1a-p-create-a-simple-canvas/11-1a-p-create-a-simple-canvas.html
@@ -50,7 +53,7 @@ public class DrawActivity extends Activity {
         String userDataJson = sharedpreferences.getString(MyConstants.UserDataKEY, "");
         UserData userData = gson.fromJson(userDataJson, UserData.class);
         String bodyPart = UserData.BodyPart.values()[userData.getPlayerNum()].getName();
-        imgName = userData.getPlayerName() + "_" + bodyPart + ".jpg";
+        imgName = userData.getPlayerName() + UNDERSCORE + bodyPart + JPG;
         return imgName;
     }
 

@@ -25,7 +25,6 @@ public class WaitingRoomActivity extends Activity {
 
     private void updatePlayers(String playerName, int playerNum) {
         if (!playerName.equals(null)) {
-            Log.i("chen", "inside updatePlayers: " + playerNum);
             TextView usernameTextView;
 
             switch(playerNum) {

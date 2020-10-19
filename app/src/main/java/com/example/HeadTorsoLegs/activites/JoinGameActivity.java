@@ -27,7 +27,7 @@ public class JoinGameActivity extends Activity {
 
 
         editTextName = findViewById(R.id.editTextName);
-        buttonJoin =(Button)findViewById(R.id.buttonJoin);
+        buttonJoin = findViewById(R.id.buttonJoin);
 
         buttonJoin.setOnClickListener(new View.OnClickListener() {
             @Override
