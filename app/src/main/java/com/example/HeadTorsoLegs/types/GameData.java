@@ -7,9 +7,6 @@ import com.google.firebase.database.DatabaseReference;
 
 public class GameData {
 
-    private String DrawingPosition;
-    private String GameProgression;
-    private String PushToken;
     private String gameCode;
     private String headDrawing;
     private String torsoDrawing;
@@ -22,14 +19,6 @@ public class GameData {
     private static FBConnect fbConnect = FBConnect.FBConnect();
 
 
-
-    public void setDrawingPosition(String drawingPosition) { DrawingPosition = drawingPosition; }
-
-    public void setGameProgression(String gameProgression) { GameProgression = gameProgression; }
-
-    public void setPushToken(String pushToken) { PushToken = pushToken; }
-
-    public String getDrawingPosition() { return DrawingPosition; }
 
     public String getGameCode() { return gameCode; }
 
@@ -75,7 +64,7 @@ public class GameData {
     }
 
 
-
+    // todo library for random?
     private String createRandCode() {
         final String ALPHA_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 

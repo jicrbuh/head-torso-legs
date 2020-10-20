@@ -1,6 +1,7 @@
 package com.example.HeadTorsoLegs.activites;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,8 +26,8 @@ public class JoinGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join_game);
 
-
-        editTextName = findViewById(R.id.editTextName);
+        sharedpreferences = getSharedPreferences(MyConstants.SharedPREFERENCE, Context.MODE_PRIVATE);
+        editTextName = findViewById(R.id.editTextJoinName);
         buttonJoin = findViewById(R.id.buttonJoin);
 
         buttonJoin.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +38,7 @@ public class JoinGameActivity extends Activity {
                 UserData userLegs = new UserData(userName, "", UserData.BodyPart.LEGS.ordinal());
                 userLegs.makeLegs();
 
-                SharedPreferences.Editor editor = sharedpreferences.edit();
+                SharedPreferences.Editor editor = sharedpreferences.edit(); //problem!!
                 String userDataJson = new Gson().toJson(userLegs);
                 editor.putString(MyConstants.UserDataKEY, userDataJson);
                 editor.commit();

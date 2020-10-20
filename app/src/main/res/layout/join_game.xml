@@ -27,7 +27,7 @@
             android:layout_marginTop="200dp"
             android:gravity="left"
             android:background="@drawable/rounded_corners"
-            android:text="@string/enter_name" />
+            android:hint="@string/enter_name" />
 
         <EditText
 
@@ -36,8 +36,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="left"
+            android:inputType="text"
+            android:layout_gravity="left"
+            android:ems="10"
             android:background="@drawable/rounded_corners"
-            android:text="@string/enter_code" />
+            android:hint="@string/enter_code" />
 
         <Button
             android:layout_marginTop="50dp"

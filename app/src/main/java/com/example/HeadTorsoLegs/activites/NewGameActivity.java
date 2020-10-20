@@ -56,12 +56,10 @@ public class NewGameActivity extends Activity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
             }
         });
 
@@ -74,19 +72,7 @@ public class NewGameActivity extends Activity {
                 userHead = new UserData(userName, gameData.getGameCode(), UserData.BodyPart.HEAD.ordinal());
                 userHead.makeHead();
 
-                // push to FB - fix all to the singleton
-                //todo maybe can get rid of sharedprefrence
-                //fbConnect.getDBRef().child("readUser").setValue(userHead);
-
                 // save userData to sharedPreferences
-                /*
-                fbConnect.readData(new FBCallback() {
-                    @Override
-                    public void onCallback(String value) {
-                        Log.d("chen", "weird thing: "+  value);
-                    }
-                });*/
-
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 String userDataJson = new Gson().toJson(userHead);
                 editor.putString(MyConstants.UserDataKEY, userDataJson);

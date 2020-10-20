@@ -83,9 +83,7 @@ public class WaitingRoomActivity extends Activity {
         buttonStartGame =(Button)findViewById(R.id.buttonStartGame);
 
         addPlayersListener();
-
-        UserData userLegs = new UserData("automatic", "automatic", UserData.BodyPart.LEGS.ordinal());
-
+        
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
