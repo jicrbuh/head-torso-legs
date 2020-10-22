@@ -91,24 +91,27 @@ public class UserData {
         this.GameCode = gameCode;
         this.PushToken = null;
         this.GameProgression = null;
-        saveNewUserToFB();
     }
 
 
     public void saveNewUserToFB() {
-
         DatabaseReference DBRef = fbConnect.getDBRef();
-        DatabaseReference gameRef = fbConnect.getDBRef().child(fbConnect.subGamePath); // todo all strings to const somewhere
+        DatabaseReference gameRef = fbConnect.getDBRef().child(fbConnect.subGamePath);
+        Log.i("chenconnect", "setSubGamePath: " + fbConnect.subGamePath);
 
         if (this.getPlayerNum() == BodyPart.HEAD.ordinal()) {
-            Log.i("chen", "this.getPlayerNum(): "  + this.getPlayerNum());
-            Log.i("chen", "saveNewUserToFB: is head " + this.getPlayerName());
+            Log.i("chenc", "this.getPlayerNum(): "  + this.getPlayerNum());
+            Log.i("chenc", "saveNewUserToFB: is head " + this.getPlayerName());
             gameRef.child(BodyPart.HEAD.getName()).setValue(this);
         }
         else if (this.getPlayerNum() == BodyPart.LEGS.ordinal()) {
-            Log.i("chen", "this.getPlayerNum(): "  + this.getPlayerNum());
-            Log.i("chen", "saveNewUserToFB: is legs "+ this.getPlayerName());
+            Log.i("chenc", "this.getPlayerNum(): "  + this.getPlayerNum());
+            Log.i("chenc", "saveNewUserToFB: is legs "+ this.getPlayerName());
             gameRef.child(BodyPart.LEGS.getName()).setValue(this);
+        }
+
+        else {
+            Log.d("UserData", "saveNewUserToFB: userNum not head or legs");
         }
 
     }
@@ -119,7 +122,7 @@ public class UserData {
     }
 
     public void makeLegs() {
-        this.setPlayerNum(1);
+        this.setPlayerNum(2);
         this.setDrawingPosition(BodyPart.LEGS.getName());
     }
 }

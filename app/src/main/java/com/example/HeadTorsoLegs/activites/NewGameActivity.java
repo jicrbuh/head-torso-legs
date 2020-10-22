@@ -38,6 +38,7 @@ public class NewGameActivity extends Activity {
 
         // save game data to FB DB
         gameData = new GameData();
+        fbConnect.setSubGamePath(gameData.getGameCode());
         gameData.saveGameDataToFB();
 
 
@@ -71,6 +72,7 @@ public class NewGameActivity extends Activity {
                 String userName = editTextName.getText().toString();
                 userHead = new UserData(userName, gameData.getGameCode(), UserData.BodyPart.HEAD.ordinal());
                 userHead.makeHead();
+                userHead.saveNewUserToFB();
 
                 // save userData to sharedPreferences
                 SharedPreferences.Editor editor = sharedpreferences.edit();

@@ -14,7 +14,7 @@ public class FBConnect {
     private static FBConnect singleInstance = null;
     final static private String baseDBPath = "game-data";
     final static private String baseStoragePath = "test";
-    final static public String subGamePath = "game2";
+    static public String subGamePath = "game2";
 
     // FB database
     private FirebaseDatabase database;
@@ -24,6 +24,15 @@ public class FBConnect {
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
+
+    public void setSubGamePath(String gamePath) {
+
+        if (!gamePath.equals("")) {
+            //Log.i("chenconnect", "setSubGamePath: " + gamePath);
+            this.subGamePath = gamePath;
+        }
+
+    }
 
     private FBConnect() {
         database = FirebaseDatabase.getInstance();
