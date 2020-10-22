@@ -1,5 +1,4 @@
 package com.example.HeadTorsoLegs.views;
-//package com.journaldev.androidcanvasbasics;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -17,7 +16,7 @@ public class DrawView extends View {
     //drawing and canvas paint
     private Paint drawPaint, canvasPaint;
     //initial color
-    private int paintColor = 0xFF660000;
+    private int paintColor = 0xFF1FFFFF;
     //canvas
     private Canvas drawCanvas;
     //canvas bitmap
@@ -34,7 +33,7 @@ public class DrawView extends View {
         //get drawing area setup for interaction
         drawPath = new Path();
         drawPaint = new Paint();
-        drawPaint.setColor(0xFF1FFFFF);
+        drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
         drawPaint.setStrokeWidth(20);
         drawPaint.setStyle(Paint.Style.STROKE);

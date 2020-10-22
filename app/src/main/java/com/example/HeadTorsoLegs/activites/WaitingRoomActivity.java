@@ -32,10 +32,6 @@ public class WaitingRoomActivity extends Activity {
                     usernameTextView = (TextView) findViewById(R.id.textViewHeads);
                     playerName = "Head: " + playerName;
                     break;
-                case 1:
-                    usernameTextView = (TextView) findViewById(R.id.textViewTorso);
-                    playerName = "Torso: " + playerName;
-                    break;
                 case 2:
                     usernameTextView = (TextView) findViewById(R.id.textViewLegs);
                     playerName = "Legs: " + playerName;
@@ -83,7 +79,7 @@ public class WaitingRoomActivity extends Activity {
         buttonStartGame =(Button)findViewById(R.id.buttonStartGame);
 
         addPlayersListener();
-        
+
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

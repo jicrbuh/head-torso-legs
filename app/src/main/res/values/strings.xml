@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Head Torso Legs</string>
+    <string name="app_name">Head &amp; Legs</string>
     <string name="join">Join Game</string>
     <string name="new_game">New Game</string>
     <string name="create_game">Create</string>
@@ -14,6 +14,7 @@
     <string name="draw">Draw:</string>
     <string name="finished">Finished!</string>
     <string name="wait_other">Waiting for the other players</string>
+    <string name="click_see">Click to see the drawing!</string>
     <string name="creation">Your Creation:</string>
     <string name="share">share</string>
 </resources>
