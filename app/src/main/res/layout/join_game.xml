@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
             android:gravity="left"
+            android:inputType="text"
             android:background="@drawable/rounded_corners"
             android:hint="@string/enter_name" />
 

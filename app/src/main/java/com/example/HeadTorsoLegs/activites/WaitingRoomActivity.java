@@ -1,13 +1,16 @@
 package com.example.HeadTorsoLegs.activites;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.HeadTorsoLegs.types.MyConstants;
 import com.example.HeadTorsoLegs.types.UserData;
 import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.headtorsolegs.R;
@@ -15,8 +18,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
+import static com.example.HeadTorsoLegs.types.MyConstants.JPG;
 import static com.example.HeadTorsoLegs.types.MyConstants.MAX_NUM_PLAYERS;
+import static com.example.HeadTorsoLegs.types.MyConstants.UNDERSCORE;
 
 public class WaitingRoomActivity extends Activity {
 
@@ -72,6 +78,21 @@ public class WaitingRoomActivity extends Activity {
         });
 
     }
+
+    private void changeRoomName() {
+        String imgName;
+        Gson gson = new Gson();
+        SharedPreferences sharedpreferences = getSharedPreferences(MyConstants.SharedPREFERENCE, Context.MODE_PRIVATE);
+        String userDataJson = sharedpreferences.getString(MyConstants.UserDataKEY, "");
+        UserData userData = gson.fromJson(userDataJson, UserData.class);
+        String gameCode = userData.getGameCode();
+
+        TextView gameTextView = (TextView) findViewById(R.id.textViewGame);
+        gameTextView.setText("Game: " + gameCode);
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +100,7 @@ public class WaitingRoomActivity extends Activity {
         buttonStartGame =(Button)findViewById(R.id.buttonStartGame);
 
         addPlayersListener();
+        changeRoomName();
 
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
