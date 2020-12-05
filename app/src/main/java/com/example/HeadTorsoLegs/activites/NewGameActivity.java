@@ -47,7 +47,7 @@ public class NewGameActivity extends Activity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(s.toString().trim().length()==0){
+                if(s.toString().trim().length() == 0) {
                     buttonCreate.setEnabled(false);
                 } else {
                     buttonCreate.setEnabled(true);
@@ -71,11 +71,10 @@ public class NewGameActivity extends Activity {
 
                 String userName = editTextName.getText().toString();
                 userHead = new UserData(userName, gameData.getGameCode(), UserData.BodyPart.HEAD.ordinal());
-                userHead.makeHead();
                 userHead.saveNewUserToFB();
 
                 // save userData to sharedPreferences
-                SharedPreferences.Editor editor = sharedpreferences.edit();
+                SharedPreferences.Editor editor = sharedpreferences.edit(); // todo make this into a singleton
                 String userDataJson = new Gson().toJson(userHead);
                 editor.putString(MyConstants.UserDataKEY, userDataJson);
                 editor.commit();

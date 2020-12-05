@@ -6,12 +6,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.HeadTorsoLegs.types.UserData;
-import com.example.HeadTorsoLegs.utilities.AsyncStr;
 import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.headtorsolegs.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
@@ -20,11 +18,6 @@ import static com.example.HeadTorsoLegs.types.MyConstants.DRAWING;
 public class ShowCreationActivity extends Activity {
     //https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-11-canvas/11-1a-p-create-a-simple-canvas/11-1a-p-create-a-simple-canvas.html
     private FBConnect fbConnect = FBConnect.FBConnect();
-
-    private void changePic() {
-        ImageView img= (ImageView) findViewById(R.id.image);
-        img.setImageResource(R.drawable.flower);
-    }
 
     private void getImgRef(final UserData.BodyPart bodyPart) {
 
@@ -37,7 +30,6 @@ public class ShowCreationActivity extends Activity {
                     String pathString = dataSnapshot.child(bodyPart.getName() + DRAWING).getValue().toString();
                     loadImageFB(bodyPart, pathString);
                 }
-
             }
 
             @Override

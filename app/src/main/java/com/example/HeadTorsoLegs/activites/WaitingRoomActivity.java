@@ -16,13 +16,8 @@ import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.headtorsolegs.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-
-import static com.example.HeadTorsoLegs.types.MyConstants.JPG;
-import static com.example.HeadTorsoLegs.types.MyConstants.MAX_NUM_PLAYERS;
-import static com.example.HeadTorsoLegs.types.MyConstants.UNDERSCORE;
 
 public class WaitingRoomActivity extends Activity {
 
@@ -32,13 +27,14 @@ public class WaitingRoomActivity extends Activity {
     private void updatePlayers(String playerName, int playerNum) {
         if (!playerName.equals(null)) {
             TextView usernameTextView;
+            UserData.BodyPart bp = UserData.BodyPart.values()[playerNum];
 
-            switch(playerNum) {
-                case 0:
+            switch (bp) {
+                case HEAD:
                     usernameTextView = (TextView) findViewById(R.id.textViewHeads);
                     playerName = "Head: " + playerName;
                     break;
-                case 2:
+                case LEGS:
                     usernameTextView = (TextView) findViewById(R.id.textViewLegs);
                     playerName = "Legs: " + playerName;
                     break;
@@ -46,19 +42,18 @@ public class WaitingRoomActivity extends Activity {
                     usernameTextView = (TextView) findViewById(R.id.textViewHeads);
                     break;
             }
+
             usernameTextView.setText(playerName);
         }
-
     }
-
 
     private void addPlayersListener() {
         // Add listener to the DB
-        Log.i("chen", "Head: " + UserData.BodyPart.HEAD.ordinal() + " Legs: " + UserData.BodyPart.LEGS.ordinal());
+        Log.i("waitingRoom", "Head: " + UserData.BodyPart.HEAD.ordinal() + " Legs: " + UserData.BodyPart.LEGS.ordinal());
         fbConnect.getDBRef().child(fbConnect.subGamePath).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                Log.i("chen", "addPlayersListener: "  + snapshot.getValue().toString());
+                Log.i("waitingRoom", "addPlayersListener: "  + snapshot.getValue().toString());
                 if (snapshot.child(UserData.BodyPart.HEAD.getName()).getValue() != null) {
                     if (snapshot.child(UserData.BodyPart.HEAD.getName()).child("playerName").getValue() != null) {
                         updatePlayers(snapshot.child(UserData.BodyPart.HEAD.getName()).child("playerName").getValue().toString(), UserData.BodyPart.HEAD.ordinal());
@@ -80,7 +75,6 @@ public class WaitingRoomActivity extends Activity {
     }
 
     private void changeRoomName() {
-        String imgName;
         Gson gson = new Gson();
         SharedPreferences sharedpreferences = getSharedPreferences(MyConstants.SharedPREFERENCE, Context.MODE_PRIVATE);
         String userDataJson = sharedpreferences.getString(MyConstants.UserDataKEY, "");
@@ -104,7 +98,7 @@ public class WaitingRoomActivity extends Activity {
 
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { // todo make this work only if all players are present
                 // go to draw screen
                 Intent intent = new Intent(view.getContext(), DrawActivity.class);
                 view.getContext().startActivity(intent);
@@ -112,9 +106,4 @@ public class WaitingRoomActivity extends Activity {
             });
     }
 
-    //todo delete
-    public void displayMessage(String message) {
-        TextView usernameTextView = (TextView) findViewById(R.id.textViewHeads);
-        usernameTextView.setText(message);
-    }
 }

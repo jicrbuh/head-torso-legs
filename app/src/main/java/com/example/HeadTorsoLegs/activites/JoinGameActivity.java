@@ -11,16 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
 import com.example.HeadTorsoLegs.types.MyConstants;
 import com.example.HeadTorsoLegs.types.UserData;
 import com.example.HeadTorsoLegs.utilities.FBConnect;
 import com.example.headtorsolegs.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
@@ -43,6 +39,7 @@ public class JoinGameActivity extends Activity {
         editGameCode = findViewById(R.id.editTextCode);
         buttonJoin = findViewById(R.id.buttonJoin);
         final UserData userLegs = new UserData("", "", UserData.BodyPart.LEGS.ordinal());
+
         buttonJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +66,6 @@ public class JoinGameActivity extends Activity {
                     fbConnect.setSubGamePath(gameCode);
 
                     UserData userLegs = new UserData(userName, gameCode, UserData.BodyPart.LEGS.ordinal());
-                    userLegs.makeLegs();
                     userLegs.saveNewUserToFB();
 
                     SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -83,7 +79,7 @@ public class JoinGameActivity extends Activity {
                 }
 
                 else {
-                    Log.i("chen", "not snapshot.hasChild(gameCode: " + code);
+                    Log.i("JoinGameActivity", "not snapshot.hasChild(gameCode: " + code);
                     Toast.makeText(getApplicationContext(), "No game found under this Game Code", Toast.LENGTH_LONG).show();
                 }
 

@@ -36,7 +36,6 @@ public class DrawActivity extends Activity {
     Button buttonFinished;
     private FBConnect fbConnect = FBConnect.FBConnect();
     StorageReference storageRef = fbConnect.getStorageReference();
-    private Activity activity;
     private View curView;
     Intent intent;
 
